@@ -1,0 +1,51 @@
+body{
+    margin: 0;
+    font-family: 'GMarketSans', Helvetica, sans-serif;
+}
+nav{
+    width: 100%;
+    height: 110px;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
+
+}
+.logo{
+    height: 100%;
+}
+.nav-buttons button{
+    height: 100%;
+    width: 140px;
+    border: 0;
+    font-size: 16px;
+    font-family: 'GMarketSans';
+    background-color: white;
+}
+.nav-buttons button:hover{
+    background-color: orange;
+    color: white;
+}
+.dropdown{
+    display: none;
+    
+}
+@font-face {
+    font-family: 'GMarketSans';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');
+    font-weight: 300;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'GMarketSans';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: 500;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'GMarketSans';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+    font-weight: 700;
+    font-display: swap;
+}
