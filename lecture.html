@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="lecture.css">
+
+
+</head>
+<body>
+<div class="lecture">
+    <div class="black-bg">
+        <div class="white-bg">
+            <h4>로그인하세요</h4>
+            <form action="success.html">
+            <div class="my-3">
+                <input type="text" class="form-control id">
+            </div>
+            <div class="my-3">
+                <input type="password" class="form-control password">
+            </div>
+            <button type="submit" class="btn btn-primary">전송</button>
+            <button type="button" class="btn btn-danger" id="close">닫기</button>
+            </form> 
+        </div>
+    </div>     
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <span class="navbar-brand">Navbar</span>
+            <button class="light">🌙다크 모드로 보기</button>
+            <button class="navbar-toggler" type="button">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav> 
+    <ul class="list-group">
+        <li class="list-group-item">An item</li>
+        <li class="list-group-item">A second item</li>
+        <li class="list-group-item">A third item</li>
+        <li class="list-group-item">A fourth item</li>
+        <li class="list-group-item">And a fifth one</li>
+    </ul> 
+    <div class="main">
+        <h2>Shirts on Sale</h2>
+    <div class="alert-box" style="padding: 20px; border-radius: 5px; background-color: skyblue; display: none; color: white;">
+        <p style="display: inline;">안녕 심피앙!</p> 
+        <button class="alert-close">X</button>
+    </div>
+    <div class="buttons"> 
+        <button class="alert-open btn btn-danger" onclick="sentence('안녕 심피앙!')">안녕띄우기</button>
+        <button class="alert-open btn btn-danger" onclick="sentence('바이 심피앙!')">바이띄우기</button>
+        <button id="open" class="btn btn-danger" onclick="document.querySelector('.black-bg').classList.add('block');">모달띄우기</button>
+
+    </div>
+   
+
+    </div>
+     <div class="alert alert-danger alert-timer">
+        <span class="time">5</span>초 이내 구매시 사은품 증정    
+    </div>
+    <div style="overflow: hidden;">
+    <div class="carousel">
+        <div class="box fbox"><img src="car1-1.png" alt=""></div>
+        <div class="box sbox"><img src="car2-1.png" alt=""></div>
+        <div class="box tbox"><img src="car3-1.png" alt=""></div>
+    </div>
+    <button class="btn btn-primary pbtn">이전</button>
+    <button class="btn btn-primary fbtn">1</button>
+    <button class="btn btn-primary sbtn">2</button>
+    <button class="btn btn-primary tbtn">3</button>
+    <button class="btn btn-primary nbtn">다음</button>
+    </div>
+    <div style="height: 1000px;">
+        <div class="lorem" style="width: 200px; height: 100px; overflow-y: scroll">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae voluptas voluptatum minus praesentium fugit debitis at, laborum ipsa itaque placeat sit, excepturi eius. Nostrum perspiciatis, eligendi quae consectetur praesentium exercitationem.
+        </div> 
+    </div>
+
+
+</div>
+ <script>
+    //이벤트 버블링
+    document.querySelector('.black-bg').addEventListener('click',(e)=>{
+        e.target; //유저가 실제로 누른것
+        e.currentTarget; // this 이벤트리스너 달린 곳
+        e.preventDefault; //이벤트 일어나는것을 막음
+        e.stopPropagation; // 이벤트 버블링을 막음
+        console.log(e.target);
+        if(e.target==document.querySelector('.black-bg')){
+            document.querySelector('.black-bg').classList.remove('block');
+        }
+    })
+    window.addEventListener('scroll', ()=>{
+        if(window.scrollY>=100){
+           document.querySelector('.navbar-brand').style.fontSize='10px';
+        }else{
+            document.querySelector('.navbar-brand').style.fontSize='30px';
+
+        }
+        
+    })  
+    document.querySelector('.lorem').addEventListener('scroll',()=>{
+        var amountOfScroll = document.querySelector('.lorem').scrollTop;
+        var 실제높이 = document.querySelector('.lorem').scrollHeight;
+        var height = document.querySelector('.lorem').clientHeight;
+        console.log(실제높이,'+',height);
+        if(amountOfScroll>=188){alert(`${amountOfScroll}! end!!!`);}
+    })
+    
+    let num = 0;
+    document.querySelector('.sbtn').addEventListener('click',()=>{
+        num=-100;
+        document.querySelector('.carousel').style.transform=`translateX(${num}vw)`;
+    })
+    document.querySelector('.fbtn').addEventListener('click',()=>{
+        num=0
+        document.querySelector('.carousel').style.transform=`translateX(${num}vw)`;
+
+    })
+    document.querySelector('.tbtn').addEventListener('click',()=>{
+        num=-200
+        document.querySelector('.carousel').style.transform=`translateX(${num}vw)`;
+        
+    })   
+      document.querySelector('.pbtn').addEventListener('click',()=>{
+        if(num<0){
+        num+=100;
+        document.querySelector('.carousel').style.transform=`translateX(${num}vw)`;        
+    }
+        
+    })
+      document.querySelector('.nbtn').addEventListener('click',()=>{
+        if(num>-200){
+        num-=100;
+        document.querySelector('.carousel').style.transform=`translateX(${num}vw)`;
+         }  
+    })
+    // var timer = setInterval(()=>{
+    //     document.querySelector('.time').innerHTML=document.querySelector('.time').textContent-1
+    //  if(document.querySelector('.time').textContent==0){
+    //     clearTimeout(timer);
+    //     document.querySelector('.alert-timer').style.display='none';}
+    // },1000)
+   
+    
+    document.querySelector('.navbar-toggler').addEventListener('click',()=>{
+        if(document.querySelector('.list-group').classList.contains('flex')){
+            document.querySelector('.list-group').classList.remove('flex');
+        }else{
+            document.querySelector('.list-group').classList.add('flex');
+        }
+    });
+    
+    document.querySelector('#close').addEventListener('click',()=>{
+        document.querySelector('.black-bg').classList.remove('block');
+    })
+    document.querySelector('.alert-close').addEventListener('click',()=>{
+        document.querySelector('.alert-box').style.display='none';
+    });
+    document.querySelectorAll('.alert-open')[0].addEventListener('click',()=>{
+        document.querySelector('.alert-box').style.display='block';
+    });
+    document.querySelectorAll('.alert-open')[1].addEventListener('click',()=>{
+        document.querySelector('.alert-box').style.display='block';
+    });
+    function sentence(what){
+        document.querySelector('.alert-box p').innerHTML=what;
+    }
+    document.querySelector('form').addEventListener('submit',(e)=>{
+         if(/\S+@\S+\.\S+/.test(document.querySelector('.id').value)==false){alert("id 잘못됨");console.log("!!");e.preventDefault();}
+         else if(document.querySelector('.password').value.length<6 || /[A-Z]/.test(document.querySelector('.password').value)==false){
+            alert("비밀번호 6자리이상+대문자 한자리");e.preventDefault();}
+    })
+   function 삼육구(a){
+    let str= a;
+    if(typeof(a)=="number"){str = a.toString();}
+    let lc = str.length-1
+    if(str[lc]==3 || str[lc]==6 ||str[lc]==9){console.log("박수");}
+    else{console.log("pass");}
+   }
+   삼육구(26);
+    var count = 0;
+   document.querySelector('.light').addEventListener('click',()=>{
+
+    if(count%2==0){
+        document.querySelector('.light').classList.remove('dark')
+        document.querySelector('body').classList.remove('dark')
+        document.querySelector('.white-bg').classList.remove('dark')
+        document.querySelector('.light').innerHTML='🌙다크 모드로 보기'
+    }else{
+        document.querySelector('.light').classList.add('dark')
+        document.querySelector('body').classList.add('dark')
+        document.querySelector('.white-bg').classList.add('dark')
+        document.querySelector('.light').innerHTML='☀️라이트 모드로 보기'
+    }
+    count+=1;
+   })
+   
+   function 함수(a,b){
+    if (b==0){
+        return a*0.9;
+
+    }else{
+        return a*0.9-1.5;
+
+    }
+   }
+   console.log(함수(10, true))
+   
+  
+   
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
