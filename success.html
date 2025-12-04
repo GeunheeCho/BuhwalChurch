@@ -42,10 +42,24 @@
   .show {
     display: block;
   }
+  .hide{
+    display: none;
+  }
 </style>
 </head>
 <body>
     <h1>!!Success!!</h1>
+
+    <form class="container my-5 form-group">
+    <p>상품선택</p>
+    <select class="form-select mt-2">
+      <option>모자</option>
+      <option>셔츠</option>
+      <option>바지</option>
+    </select>
+    <select class="form-select mt-2 hide">
+    </select>
+</form>
 <div class="container mt-5">
   <ul class="list">
     <li class="tab-button" data-id="0">Products</li>
@@ -95,13 +109,7 @@
     </div>
   </div>
 </div>
-<form class="container my-5 form-group">
-    <p>상품선택</p>
-    <select class="form-select mt-2">
-      <option>모자</option>
-      <option>셔츠</option>
-    </select>
-</form>
+
 <script src="success.js"></script>
 </body>
 </html>
