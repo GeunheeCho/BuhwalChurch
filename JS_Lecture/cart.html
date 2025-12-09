@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+</head>
+<body>
+    <div class="cart">
+        카트 담긴 물건들
+        <ul class="cart-content">
+            
+        </ul>
+    </div>
+    <script>
+        var cartContent = JSON.parse(localStorage.getItem('cart'));
+        cartContent.forEach(element => {
+            var carthtml = `<li>${element}</li>`
+            console.log(carthtml);
+            document.querySelector('.cart-content').insertAdjacentHTML('beforeend', carthtml);
+        });
+        
+    </script>
+</body>
+</html>
