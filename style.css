@@ -1,0 +1,195 @@
+body{
+    margin: 0;
+    font-family: 'Pretendard','GMarketSans', Helvetica, sans-serif;
+}
+nav{
+    width: 100%;
+    height: 130px;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-around;
+    position: fixed;
+    top: 0;
+    z-index: 5;
+    background-color: white;
+}
+
+.nav-btns{
+    display: flex;
+    align-items: stretch;
+}
+.about-church,.about-worship, .about-news{
+    height: 90%;
+    width: 140px;
+    position: relative;
+}
+.about-church-btn, .about-worship-btn, .about-news-btn{
+    height: 100%;
+    width: 140px;
+    border: 0;
+    font-size: 19px;
+    font-weight: 700;
+    background-color: white;
+}
+.about-church-btn:hover,.about-worship-btn:hover ,.about-news-btn:hover{
+    background-color: orange;
+    color: white;
+}
+.about-drdn, .about-news-drdn{
+    height: max-content;
+    display: none;
+    overflow: hidden;
+    text-align: center;
+    position: absolute;
+    top: 100%;
+    left: 0%;
+}
+.about-church:hover .about-drdn, .about-news:hover .about-news-drdn{
+   display: block;
+}
+.about-drdn button, .about-news-drdn button{
+    font-size: 15px;
+    width: 100%;
+    height: 50px;
+    border: none;
+    background-color: white;
+}
+.about-drdn button:hover , .about-news-drdn button:hover{
+    background-color: black;
+    color: white;
+}
+
+
+.carousel{
+    width: 100%;
+    height: 800px;
+    background-color: aliceblue;
+    margin-top: 110px;
+}
+
+.schedule{
+    display: grid;   
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 100px 300px; 
+    gap: 20px;
+    grid-template-areas:
+    ". head ."
+    ". schedule .";
+}
+.schedule-head{
+    grid-area: head;
+    text-align: center;
+    font-weight: 600;
+    font-size: 30px;
+}
+.schedule-divider{
+    display: flex;         /* 요소들을 가로로 나열 */
+    align-items: center;    /* 세로 중앙 정렬 */
+    text-align: center;
+    margin: 20px 0;         /* 위아래 간격 */
+    color: #999;
+}
+.schedule-divider::before,.schedule-divider::after{
+    content: "";
+    flex: 2;
+    height: 1.5px;
+    background-color: #999;
+}
+.schedule-box{
+    grid-area: schedule;
+    text-align: center;
+    margin-top: 10px;
+
+}
+.card-title{
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.card-content{
+    font-size: 22px;
+    line-height: 18px;
+    color: rgb(75, 75, 75);
+}
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Thin.woff2') format('woff2');
+    font-weight: 100;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-ExtraLight.woff2') format('woff2');
+    font-weight: 200;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-ExtraBold.woff2') format('woff2');
+    font-weight: 800;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Black.woff2') format('woff2');
+    font-weight: 900;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'GMarketSans';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');
+    font-weight: 300;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'GMarketSans';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: 500;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'GMarketSans';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+    font-weight: 700;
+    font-display: swap;
+}
