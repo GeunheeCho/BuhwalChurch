@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import { ChevronDown } from "lucide-react"
 
 const menuItems = [
@@ -16,7 +17,7 @@ const menuItems = [
   {
     title: "부활교회 소식",
     hasDropdown: true,
-    subItems: ["공지사항", "주보", "갤러리"],
+    subItems: ["온라인 주보", "부활 갤러리", "부활교회 찬양"],
   },
 ]
 
@@ -26,10 +27,17 @@ export default function Header() {
   return (
     <header className="w-full bg-white sticky top-0 z-50 shadow-sm">
       <div className="max-w-[1200px] mx-auto flex items-center justify-between px-4 py-4">
-        {/* Logo placeholder */}
-        <div className="w-[180px] h-[60px] bg-gray-200 flex items-center justify-center text-gray-400 text-sm border border-dashed border-gray-300">
-          로고 이미지
-        </div>
+        {/* Logo */}
+        <a href="#" className="relative w-[180px] h-[60px] shrink-0">
+          <Image
+            src="/Logo.png"
+            alt=""
+            fill
+            sizes="180px"
+            priority
+            className="object-contain"
+          />
+        </a>
 
         {/* Navigation - centered */}
         <nav className="hidden md:flex items-center justify-center flex-1 gap-12">

@@ -1,11 +1,17 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
 export default function HeroCarousel() {
   const [currentSlide, setCurrentSlide] = useState(0)
-  const totalSlides = 3
+  const slides = [
+    { src: "/Carousel1.png", alt: "Carousel 1" },
+    { src: "/Carousel2.png", alt: "Carousel 2" },
+    { src: "/Carousel3.png", alt: "Carousel 3" },
+  ] as const
+  const totalSlides = slides.length
 
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev === 0 ? totalSlides - 1 : prev - 1))
@@ -17,12 +23,26 @@ export default function HeroCarousel() {
 
   return (
     <section className="relative w-full" style={{ height: "800px", maxHeight: "50vw" }}>
-      {/* Carousel placeholder */}
-      <div className="w-full h-full bg-gray-300 flex items-center justify-center">
-        <div className="text-center text-gray-500">
-          <p className="text-2xl mb-2">캐러셀 이미지</p>
-          <p className="text-lg">1920 x 800px</p>
-        </div>
+      {/* Slides */}
+      <div className="relative w-full h-full overflow-hidden">
+        {slides.map((slide, index) => (
+          <div
+            key={slide.src}
+            className={`absolute inset-0 transition-opacity duration-500 ${
+              currentSlide === index ? "opacity-100" : "opacity-0"
+            }`}
+            aria-hidden={currentSlide !== index}
+          >
+            <Image
+              src={slide.src}
+              alt={slide.alt}
+              fill
+              priority={index === 0}
+              sizes="100vw"
+              className="object-cover"
+            />
+          </div>
+        ))}
       </div>
 
       {/* Left Arrow */}

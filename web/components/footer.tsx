@@ -1,5 +1,5 @@
-import { Instagram, Youtube } from "lucide-react"
 import Image from "next/image"
+import { InstagramIcon } from "./icons/instagram-icon"
 
 export default function Footer() {
   return (
@@ -27,10 +27,13 @@ export default function Footer() {
 
           {/* Social Icons */}
           <div className="flex items-center gap-3">
-            <a href="#" className="text-gray-500 hover:text-[#fcaa4c] transition-colors">
-              <Instagram className="w-5 h-5" />
+            <a href="https://www.instagram.com/buhwal_church/" className="text-gray-500 hover:text-[#fcaa4c] transition-colors">
+              <InstagramIcon className="w-5 h-5" />
             </a>
-            <a href="#" className="hover:opacity-80 transition-opacity">
+            <a href="https://www.instagram.com/buhwalch_.kids/" className="text-gray-500 hover:text-[#fcaa4c] transition-colors">
+              <InstagramIcon className="w-5 h-5" />
+            </a>
+            <a href="https://blog.naver.com/jesuschristlovesyou" className="hover:opacity-80 transition-opacity">
               <Image
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-tzWuNwDi5dvvRSpvA7mMH8u1gPpPg8.png"
                 alt="네이버 블로그"
@@ -39,16 +42,13 @@ export default function Footer() {
                 className="rounded"
               />
             </a>
-            <a href="#" className="text-gray-500 hover:text-[#fcaa4c] transition-colors">
-              <Youtube className="w-5 h-5" />
-            </a>
           </div>
         </div>
 
         {/* Info Section */}
-        <div className="text-[13px] text-gray-500 space-y-1">
+        <div className="text-[14px] text-gray-500 space-y-1">
           <p>
-            기독교대한감리회 의정부 부활교회 &nbsp; 담임목사: 리규성
+            기독교대한감리회 의정부 부활교회 &nbsp; 담임목사: 리규상
           </p>
           <p>
             주소: 경기도 의정부시 추동로 92번길 29 전화번호: 031-877-4333
