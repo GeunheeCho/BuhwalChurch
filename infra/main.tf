@@ -78,7 +78,7 @@ resource "aws_cloudfront_distribution" "buhwalch_distribution" {
 
   enabled             = true
   default_root_object = "main.html"
-
+  # 도메인 연결 시 사용
   # aliases = ["mysite.${local.my_domain}", "yoursite.${local.my_domain}"]
 
   default_cache_behavior {
@@ -90,8 +90,9 @@ resource "aws_cloudfront_distribution" "buhwalch_distribution" {
       query_string = false
       cookies { forward = "none" }
     }
-
+    # http 접속시 https로 redirect
     viewer_protocol_policy = "redirect-to-https"
+    # cache ttl
     min_ttl                = 0
     default_ttl            = 60
     max_ttl                = 600
@@ -109,7 +110,8 @@ resource "aws_cloudfront_distribution" "buhwalch_distribution" {
   }
 
   viewer_certificate {
-    cloudfront_default_certificate = true # AWS 기본 주소랑 인증서 쓴다는 말
+    # AWS 기본 주소랑 인증서 사용
+    cloudfront_default_certificate = true 
   }
 }
 
