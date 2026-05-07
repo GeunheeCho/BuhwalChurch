@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Image from "next/image"
+import Link from "next/link"
 import { ChevronDown } from "lucide-react"
 
 const menuItems = [
@@ -64,13 +65,13 @@ export default function Header() {
                 <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50">
                   <div className="bg-white shadow-lg border border-gray-100 min-w-[140px]">
                     {item.subItems?.map((subItem, subIndex) => (
-                      <a
+                      <Link
                         key={subIndex}
-                        href="#"
+                        href={subItem === "WELCOME" ? "/welcome" : "#"}
                         className="block px-4 py-2 text-[14px] text-gray-700 hover:text-[#fcaa4c] hover:bg-gray-50 text-center transition-colors"
                       >
                         {subItem}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>
