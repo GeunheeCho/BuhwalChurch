@@ -68,6 +68,10 @@ resource "aws_cloudfront_origin_access_control" "main" {
   signing_behavior                  = "always"
   signing_protocol                  = "sigv4"
 }
+# aws가 만든 캐시 정책을 불러오는 data 블록
+data "aws_cloudfront_cache_policy" "CachingOptimized" {
+  name = "Managed-CachingOptimized"
+}
 #distributiuon 생성
 resource "aws_cloudfront_distribution" "buhwalch_distribution" {
   origin {
@@ -77,7 +81,7 @@ resource "aws_cloudfront_distribution" "buhwalch_distribution" {
   }
 
   enabled             = true
-  default_root_object = "main.html"
+  default_root_object = "index.html"
   # 도메인 연결 시 사용
   # aliases = ["mysite.${local.my_domain}", "yoursite.${local.my_domain}"]
 
@@ -86,18 +90,10 @@ resource "aws_cloudfront_distribution" "buhwalch_distribution" {
     cached_methods   = ["GET", "HEAD"]
     target_origin_id = "S3-Origin"
 
-    forwarded_values {
-      query_string = false
-      cookies { forward = "none" }
-    }
+    cache_policy_id = data.aws_cloudfront_cache_policy.CachingOptimized.id
     # http 접속시 https로 redirect
-    viewer_protocol_policy = "redirect-to-https"
-    # cache ttl
-    min_ttl     = 0
-    default_ttl = 60
-    max_ttl     = 600
-  }
-  price_class = "PriceClass_100"
+    viewer_protocol_policy = "redirect-to-https"    
+  }  
 
   restrictions {
     geo_restriction {
@@ -106,7 +102,7 @@ resource "aws_cloudfront_distribution" "buhwalch_distribution" {
   }
 
   tags = {
-    Environment = "learn"
+    Environment = "service"
   }
 
   viewer_certificate {
