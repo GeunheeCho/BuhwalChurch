@@ -5,6 +5,12 @@ import Image from "next/image"
 import Link from "next/link"
 import { ChevronDown } from "lucide-react"
 
+const subItemHrefMap: Record<string, string> = {
+  WELCOME: "/welcome",
+  "부활교회는": "/aboutBuhwal",
+  오시는길: "/location",
+}
+
 const menuItems = [
   {
     title: "교회안내",
@@ -14,6 +20,7 @@ const menuItems = [
   {
     title: "예배안내",
     hasDropdown: false,
+    href: "/worship",
   },
   {
     title: "부활교회 소식",
@@ -29,7 +36,7 @@ export default function Header() {
     <header className="w-full bg-white sticky top-0 z-50 shadow-sm">
       <div className="max-w-[1200px] mx-auto flex items-center justify-between px-4 py-4">
         {/* Logo */}
-        <a href="#" className="relative w-[180px] h-[60px] shrink-0">
+        <Link href="/" className="relative block w-[180px] h-[60px] shrink-0">
           <Image
             src="/Logo.png"
             alt=""
@@ -38,7 +45,7 @@ export default function Header() {
             priority
             className="object-contain"
           />
-        </a>
+        </Link>
 
         {/* Navigation - centered */}
         <nav className="hidden md:flex items-center justify-center flex-1 gap-12">
@@ -49,30 +56,51 @@ export default function Header() {
               onMouseEnter={() => item.hasDropdown && setOpenDropdown(index)}
               onMouseLeave={() => setOpenDropdown(null)}
             >
-              <button
-                className={`flex items-center gap-1 text-[19px] font-medium transition-colors ${
-                  openDropdown === index ? "text-[#fcaa4c]" : "text-gray-800 hover:text-[#fcaa4c]"
-                }`}
-              >
-                {item.title}
-                {item.hasDropdown && (
-                  <ChevronDown className={`w-4 h-4 transition-transform ${openDropdown === index ? "rotate-180" : ""}`} />
-                )}
-              </button>
+              {"href" in item && item.href ? (
+                <Link
+                  href={item.href}
+                  className="flex items-center gap-1 text-[19px] font-medium text-gray-800 transition-colors hover:text-[#fcaa4c]"
+                >
+                  {item.title}
+                </Link>
+              ) : (
+                <button
+                  type="button"
+                  className={`flex items-center gap-1 text-[19px] font-medium transition-colors ${
+                    openDropdown === index ? "text-[#fcaa4c]" : "text-gray-800 hover:text-[#fcaa4c]"
+                  }`}
+                >
+                  {item.title}
+                  {item.hasDropdown && (
+                    <ChevronDown className={`w-4 h-4 transition-transform ${openDropdown === index ? "rotate-180" : ""}`} />
+                  )}
+                </button>
+              )}
 
               {/* Dropdown */}
               {item.hasDropdown && openDropdown === index && (
                 <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50">
                   <div className="bg-white shadow-lg border border-gray-100 min-w-[140px]">
-                    {item.subItems?.map((subItem, subIndex) => (
-                      <Link
-                        key={subIndex}
-                        href={subItem === "WELCOME" ? "/welcome" : "#"}
-                        className="block px-4 py-2 text-[14px] text-gray-700 hover:text-[#fcaa4c] hover:bg-gray-50 text-center transition-colors"
-                      >
-                        {subItem}
-                      </Link>
-                    ))}
+                    {item.subItems?.map((subItem, subIndex) => {
+                      const href = subItemHrefMap[subItem]
+
+                      const className =
+                        "block w-full px-4 py-2 text-[14px] text-gray-700 hover:text-[#fcaa4c] hover:bg-gray-50 text-center transition-colors"
+
+                      if (!href) {
+                        return (
+                          <button key={subIndex} type="button" className={className}>
+                            {subItem}
+                          </button>
+                        )
+                      }
+
+                      return (
+                        <Link key={subIndex} href={href} className={className}>
+                          {subItem}
+                        </Link>
+                      )
+                    })}
                   </div>
                 </div>
               )}

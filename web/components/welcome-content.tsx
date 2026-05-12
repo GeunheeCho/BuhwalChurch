@@ -7,8 +7,9 @@ export default function WelcomeContent() {
             {/* Left Quote Mark */}
             <span className="text-[#fcaa4c] text-[80px] leading-none font-serif select-none">"</span>
             
-            <p className="text-center text-[22px] sm:text-[26px] text-gray-700 leading-relaxed pt-6 max-w-[700px]">
-              수고하고 무거운 짐 진 자들아 다 내게로 오라 내가 너희를 쉬게 하리라
+            <p className="text-center text-[22px] sm:text-[26px] text-gray-700 leading-relaxed font-bold pt-6 max-w-[700px]">
+              수고하고 무거운 짐 진 자들아 다 내게로 오라 <br />
+              내가 너희를 쉬게 하리라
             </p>
             
             {/* Right Quote Mark */}
@@ -25,11 +26,11 @@ export default function WelcomeContent() {
             {/* Left Column - Welcome Text */}
             <div className="flex-1">
               {/* Welcome Title with Corner Brackets */}
-              <div className="relative mb-8">
+              <div className="relative mb-8 ml-1">
                 {/* Top Left Corner */}
-                <div className="absolute -top-4 -left-4 w-8 h-8 border-l-2 border-t-2 border-gray-400" />
+                <div className="absolute -top-4 -left-4 w-8 h-8 border-l-4 border-t-4 border-gray-400" />
                 {/* Bottom Right Corner */}
-                <div className="absolute -bottom-4 -right-4 w-8 h-8 border-r-2 border-b-2 border-gray-400" />
+                <div className="absolute -bottom-4 -right-4 w-8 h-8 border-r-4 border-b-4 border-gray-400" />
                 
                 <div className="py-6 px-4">
                   <h2 className="text-[28px] sm:text-[32px] font-bold text-gray-800 leading-snug">
