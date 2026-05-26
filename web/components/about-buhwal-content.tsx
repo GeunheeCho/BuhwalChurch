@@ -1,3 +1,5 @@
+import Image from "next/image"
+
 export default function AboutContent() {
     const values = [
       { number: 1, text: "꿈이 있는 긍정적인 신앙" },
@@ -24,10 +26,10 @@ export default function AboutContent() {
           <div className="max-w-[1100px] mx-auto">
             <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start">
               {/* 왼쪽: 표어 텍스트 */}
-              <div className="md:w-[280px] flex-shrink-0">
+              <div className="md:w-[280px] ml-3 flex-shrink-0">
                 <div className="border-t-4 border-[#fcaa4c] w-16 mb-4" />
-                <p className="text-[15px] text-gray-700 mb-2">2026년도 부활교회 표어</p>
-                <h2 className="text-[24px] md:text-[28px] font-bold text-[#fcaa4c] leading-tight">
+                <p className="text-[18px] text-gray-700 mb-2">2026년도 부활교회 표어</p>
+                <h2 className="text-[28px] md:text-[28px] font-bold text-[#fcaa4c] leading-tight">
                   영광이 더욱 충만한 교회
                 </h2>
                 <p className="text-[20px] md:text-[24px] font-bold text-[#fcaa4c] mt-1">
@@ -35,12 +37,20 @@ export default function AboutContent() {
                 </p>
               </div>
   
-              {/* 오른쪽: 이미지 자리 (플레이스홀더 — 가로 폭 축소) */}
+              {/* 오른쪽: 표어 이미지 */}
               <div className="w-full flex justify-center md:justify-end md:flex-1">
-                <div
-                  className="w-full max-w-[200px] sm:max-w-[240px] rounded-lg bg-gray-100 border border-dashed border-gray-300 aspect-[4/3] min-h-[160px]"
-                  aria-hidden
-                />
+                {/* 표어 이미지 표시 영역(최대): 500px(가로) x 350px(세로)
+                    - 모바일/작은 화면에서는 가로가 화면폭에 맞춰 더 작아질 수 있어요.
+                    - fill + object-cover라서 영역을 꽉 채우되 가장자리가 일부 잘릴 수 있어요. */}
+                <div className="relative w-full max-w-[500px] h-[350px] rounded-lg overflow-hidden">
+                  <Image
+                    src="/표어.png"
+                    alt="2026년도 부활교회 표어"
+                    fill
+                    className="object-cover object-center"
+                    sizes="(max-width: 768px) 100vw, 500px"
+                  />
+                </div>
               </div>
             </div>
           </div>

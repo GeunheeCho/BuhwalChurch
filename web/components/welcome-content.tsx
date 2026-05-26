@@ -1,3 +1,5 @@
+import Image from "next/image"
+
 export default function WelcomeContent() {
     return (
       <section className="py-16 px-4 bg-white">
@@ -47,8 +49,8 @@ export default function WelcomeContent() {
                   경기도 의정부시 신곡2동에<br />
                   위치해 있는 부활교회는<br />
                   2007년에 처음 개척하여<br />
-                  <span className="text-[#3bb4e5] font-semibold">하나님의 크고 놀라우신 사랑과</span><br />
-                  <span className="text-[#3bb4e5] font-semibold">예수님의 십자가의 복음</span>을 전하고<br />
+                  <span className="text-[#fcaa4c] font-semibold">하나님의 크고 놀라우신 사랑과</span><br />
+                  <span className="text-[#fcaa4c] font-semibold">예수님의 십자가의 복음</span>을 전하고<br />
                   지역사회의 이웃들을 사랑으로 섬기는<br />
                   기독교대한감리회 소속의 교회입니다.
                 </p>
@@ -57,12 +59,14 @@ export default function WelcomeContent() {
   
             {/* Right Column - Church Photo */}
             <div className="flex-1 w-full">
-              {/* Placeholder for church building photo */}
-              <div className="w-full aspect-[4/5] bg-gray-200 rounded-lg flex items-center justify-center">
-                <div className="text-center text-gray-500">
-                  <p className="text-lg mb-1">교회 건물 사진</p>
-                  <p className="text-sm">이미지를 추가해주세요</p>
-                </div>
+              <div className="relative w-full aspect-[4/5] rounded-lg overflow-hidden">
+                <Image
+                  src="/church.jpg"
+                  alt="부활교회 건물"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 550px"
+                />
               </div>
             </div>
           </div>

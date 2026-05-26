@@ -10,12 +10,12 @@ export const metadata: Metadata = {
 
 export default function BulletinPage() {
   return (
-    <>
+    <div className="min-h-screen flex flex-col font-sans">
       <Header />
-      <main className="min-h-screen bg-white">
+      <main className="flex-1 bg-white">
         <BulletinContent />
       </main>
       <Footer />
-    </>
+    </div>
   )
 }

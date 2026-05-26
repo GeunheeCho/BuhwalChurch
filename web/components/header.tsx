@@ -3,19 +3,36 @@
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { ChevronDown } from "lucide-react"
 
-const subItemHrefMap: Record<string, string> = {
-  WELCOME: "/welcome",
-  "부활교회는": "/aboutBuhwal",
-  오시는길: "/location",
+type SubMenuItem = {
+  label: string
+  href: string
 }
 
-const menuItems = [
+type MenuItem =
+  | {
+      title: string
+      hasDropdown: true
+      subItems: SubMenuItem[]
+    }
+  | {
+      title: string
+      hasDropdown: false
+      href: string
+    }
+
+const menuItems: MenuItem[] = [
   {
     title: "교회안내",
     hasDropdown: true,
-    subItems: ["WELCOME", "부활교회는", "오시는길", "섬기는 분들"],
+    subItems: [
+      { label: "WELCOME", href: "/welcome" },
+      { label: "부활교회는", href: "/aboutBuhwal" },
+      { label: "오시는길", href: "/location" },
+      { label: "섬기는 분들", href: "/staff" },
+    ],
   },
   {
     title: "예배안내",
@@ -25,11 +42,34 @@ const menuItems = [
   {
     title: "부활교회 소식",
     hasDropdown: true,
-    subItems: ["온라인 주보", "부활 갤러리", "부활교회 찬양"],
+    subItems: [
+      { label: "온라인 주보", href: "/jubo" },
+      { label: "부활 갤러리", href: "" },
+      { label: "부활교회 찬양", href: "" },
+    ],
   },
 ]
 
+function isPathActive(pathname: string, href: string) {
+  if (!href) return false
+  return pathname === href || pathname.startsWith(`${href}/`)
+}
+
+function isMenuActive(pathname: string, item: MenuItem) {
+  if (!item.hasDropdown && "href" in item) {
+    return isPathActive(pathname, item.href)
+  }
+  if (item.hasDropdown) {
+    return item.subItems.some((sub) => isPathActive(pathname, sub.href))
+  }
+  return false
+}
+
+const activeLinkClass = "text-[#fcaa4c]"
+const inactiveLinkClass = "text-gray-800 hover:text-[#fcaa4c]"
+
 export default function Header() {
+  const pathname = usePathname()
   const [openDropdown, setOpenDropdown] = useState<number | null>(null)
 
   return (
@@ -49,63 +89,65 @@ export default function Header() {
 
         {/* Navigation - centered */}
         <nav className="hidden md:flex items-center justify-center flex-1 gap-12">
-          {menuItems.map((item, index) => (
-            <div
-              key={index}
-              className="relative"
-              onMouseEnter={() => item.hasDropdown && setOpenDropdown(index)}
-              onMouseLeave={() => setOpenDropdown(null)}
-            >
-              {"href" in item && item.href ? (
-                <Link
-                  href={item.href}
-                  className="flex items-center gap-1 text-[19px] font-medium text-gray-800 transition-colors hover:text-[#fcaa4c]"
-                >
-                  {item.title}
-                </Link>
-              ) : (
-                <button
-                  type="button"
-                  className={`flex items-center gap-1 text-[19px] font-medium transition-colors ${
-                    openDropdown === index ? "text-[#fcaa4c]" : "text-gray-800 hover:text-[#fcaa4c]"
-                  }`}
-                >
-                  {item.title}
-                  {item.hasDropdown && (
-                    <ChevronDown className={`w-4 h-4 transition-transform ${openDropdown === index ? "rotate-180" : ""}`} />
-                  )}
-                </button>
-              )}
+          {menuItems.map((item, index) => {
+            const isActive = isMenuActive(pathname, item)
+            const isOpen = openDropdown === index
+            const parentClassName = `flex items-center gap-1 text-[19px] font-medium transition-colors ${
+              isActive || isOpen ? activeLinkClass : inactiveLinkClass
+            }`
 
-              {/* Dropdown */}
-              {item.hasDropdown && openDropdown === index && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50">
-                  <div className="bg-white shadow-lg border border-gray-100 min-w-[140px]">
-                    {item.subItems?.map((subItem, subIndex) => {
-                      const href = subItemHrefMap[subItem]
+            return (
+              <div
+                key={item.title}
+                className="relative"
+                onMouseEnter={() => item.hasDropdown && setOpenDropdown(index)}
+                onMouseLeave={() => setOpenDropdown(null)}
+              >
+                {!item.hasDropdown ? (
+                  <Link href={item.href} className={parentClassName}>
+                    {item.title}
+                  </Link>
+                ) : (
+                  <button type="button" className={parentClassName}>
+                    {item.title}
+                    <ChevronDown
+                      className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
+                    />
+                  </button>
+                )}
 
-                      const className =
-                        "block w-full px-4 py-2 text-[14px] text-gray-700 hover:text-[#fcaa4c] hover:bg-gray-50 text-center transition-colors"
+                {/* Dropdown */}
+                {item.hasDropdown && isOpen && (
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50">
+                    <div className="bg-white shadow-lg border border-gray-100 min-w-[140px]">
+                      {item.subItems.map((subItem) => {
+                        const subActive = isPathActive(pathname, subItem.href)
+                        const className = `block w-full px-4 py-2 text-[14px] text-center transition-colors ${
+                          subActive
+                            ? "text-[#fcaa4c] bg-gray-50"
+                            : "text-gray-700 hover:text-[#fcaa4c] hover:bg-gray-50"
+                        }`
 
-                      if (!href) {
+                        if (!subItem.href) {
+                          return (
+                            <button key={subItem.label} type="button" className={className}>
+                              {subItem.label}
+                            </button>
+                          )
+                        }
+
                         return (
-                          <button key={subIndex} type="button" className={className}>
-                            {subItem}
-                          </button>
+                          <Link key={subItem.label} href={subItem.href} className={className}>
+                            {subItem.label}
+                          </Link>
                         )
-                      }
-
-                      return (
-                        <Link key={subIndex} href={href} className={className}>
-                          {subItem}
-                        </Link>
-                      )
-                    })}
+                      })}
+                    </div>
                   </div>
-                </div>
-              )}
-            </div>
-          ))}
+                )}
+              </div>
+            )
+          })}
         </nav>
 
         {/* Spacer for balance */}
