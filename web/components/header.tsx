@@ -45,7 +45,7 @@ const menuItems: MenuItem[] = [
     subItems: [
       { label: "온라인 주보", href: "/jubo" },
       { label: "부활 갤러리", href: "" },
-      { label: "부활교회 찬양", href: "" },
+      { label: "부활교회 찬양", href: "/praise" },
     ],
   },
 ]
@@ -71,6 +71,7 @@ const inactiveLinkClass = "text-gray-800 hover:text-[#fcaa4c]"
 export default function Header() {
   const pathname = usePathname()
   const [openDropdown, setOpenDropdown] = useState<number | null>(null)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   return (
     <header className="w-full bg-white sticky top-0 z-50 shadow-sm">
@@ -154,12 +155,67 @@ export default function Header() {
         <div className="hidden md:block w-[180px]" />
 
         {/* Mobile menu button */}
-        <button className="md:hidden text-gray-700">
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="md:hidden text-gray-700 focus:outline-none"
+          aria-label="메뉴 토글"
+        >
           <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            {isMobileMenuOpen ? (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            )}
           </svg>
         </button>
       </div>
+
+      {/* Mobile Menu Dropdown */}
+      {isMobileMenuOpen && (
+        <div className="absolute top-full left-0 w-full bg-white border-t border-gray-100 shadow-lg md:hidden">
+          <nav className="flex flex-col p-5 gap-4">
+            {menuItems.map((item) => (
+              <div key={item.title} className="flex flex-col">
+                {!item.hasDropdown ? (
+                  <Link
+                    href={item.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`text-[16px] font-medium py-1.5 transition-colors ${
+                      isPathActive(pathname, item.href)
+                        ? "text-[#fcaa4c] font-bold"
+                        : "text-gray-800 hover:text-[#fcaa4c]"
+                    }`}
+                  >
+                    {item.title}
+                  </Link>
+                ) : (
+                  <div className="flex flex-col gap-1">
+                    <span className="text-[16px] font-medium text-gray-400 py-1.5 select-none">
+                      {item.title}
+                    </span>
+                    <div className="pl-3 flex flex-col gap-2 border-l-2 border-amber-200">
+                      {item.subItems.map((subItem) => (
+                        <Link
+                          key={subItem.label}
+                          href={subItem.href || "#"}
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          className={`text-[15px] py-1 transition-colors ${
+                            isPathActive(pathname, subItem.href)
+                              ? "text-[#fcaa4c] font-bold"
+                              : "text-gray-600 hover:text-[#fcaa4c]"
+                          }`}
+                        >
+                          {subItem.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </nav>
+        </div>
+      )}
     </header>
   )
 }

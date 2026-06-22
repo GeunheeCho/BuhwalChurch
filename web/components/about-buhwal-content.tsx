@@ -44,7 +44,7 @@ export default function AboutContent() {
                     - fill + object-cover라서 영역을 꽉 채우되 가장자리가 일부 잘릴 수 있어요. */}
                 <div className="relative w-full max-w-[500px] h-[350px] rounded-lg overflow-hidden">
                   <Image
-                    src="/표어.png"
+                    src="/Slogan.png"
                     alt="2026년도 부활교회 표어"
                     fill
                     className="object-cover object-center"

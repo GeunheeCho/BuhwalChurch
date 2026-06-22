@@ -5,7 +5,7 @@ const staffData = [
     {
       id: 1,
       name: "리규상 담임목사",
-      image: "/리규상목사.png",
+      image: "/Pastor.png",
       imageAlt: "리규상 담임목사",
       verse: [        '"주라 그리하면 너희에게 줄 것이니',
         '곤 후히 되어 누르고 흔들어 넘치도록 하여',
@@ -18,7 +18,7 @@ const staffData = [
     {
       id: 2,
       name: "이경숙 심방전도사",
-      image: null as string | null,
+      image: "/Assistant-Pastor.jpg",
       imageAlt: "이경숙 심방전도사",
       verse: [] as string[],
       verseRef: "",

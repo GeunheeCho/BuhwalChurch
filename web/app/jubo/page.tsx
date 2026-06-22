@@ -33,16 +33,16 @@ async function getJuboDates(): Promise<string[]> {
 
     const command = new ListObjectsV2Command({
       Bucket: bucket,
-      Prefix: "jubo/", // jubo 폴더 안만 뒤지기
+      Prefix: "jubo-images/", // jubo-images 폴더 안만 뒤지기
       Delimiter: "/",  // 하위 폴더 형태로 끊어서 가져오기
     });
 
     const response = await client.send(command);
     
-    // CommonPrefixes 배열 안에 'jubo/2026-06-21/' 같은 폴더 명들이 들어옴
+    // CommonPrefixes 배열 안에 'jubo-images/2026-06-21/' 같은 폴더 명들이 들어옴
     const folders = response.CommonPrefixes?.map(p => {
-      // 'jubo/2026-06-21/' 에서 날짜글자('2026-06-21')만 쏙 빼내는 작업
-      return p.Prefix?.replace("jubo/", "").replace("/", "") || "";
+      // 'jubo-images/2026-06-21/' 에서 날짜글자('2026-06-21')만 쏙 빼내는 작업
+      return p.Prefix?.replace("jubo-images/", "").replace("/", "") || "";
     }).filter(Boolean) || [];
 
     // 최신 날짜가 맨 위로 오도록 역순 정렬!

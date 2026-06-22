@@ -34,13 +34,13 @@ async function getJuboDates(): Promise<string[]> {
 
     const command = new ListObjectsV2Command({
       Bucket: bucket,
-      Prefix: "jubo/",
+      Prefix: "jubo-images/",
       Delimiter: "/",
     })
 
     const response = await client.send(command)
     const folders = response.CommonPrefixes?.map(p => {
-      return p.Prefix?.replace("jubo/", "").replace("/", "") || ""
+      return p.Prefix?.replace("jubo-images/", "").replace("/", "") || ""
     }).filter(Boolean) || []
 
     return folders
@@ -80,7 +80,7 @@ async function getJuboImages(date: string): Promise<string[]> {
 
     const command = new ListObjectsV2Command({
       Bucket: bucket,
-      Prefix: `jubo/${date}/`,
+      Prefix: `jubo-images/${date}/`,
     })
 
     const response = await client.send(command)
