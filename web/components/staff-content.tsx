@@ -59,7 +59,7 @@ function StaffCard({ staff }: { staff: typeof staffData[0] }) {
         </div>
 
         {/* 사진 - 회색 박스 위로 오버랩 (명시적 높이로 fill 이미지 오류 방지) */}
-        <div className="relative md:absolute md:right-[5%] md:-top-10 md:w-[42%] h-[200px] md:h-[300px] mt-6 md:mt-0">
+        <div className="relative w-[352px] max-w-full h-[200px] md:absolute md:right-[5%] md:-top-10 md:w-[42%] md:h-[300px] mt-6 md:mt-0 mx-auto md:mx-0">
           {staff.image ? (
             <Image
               src={staff.image}

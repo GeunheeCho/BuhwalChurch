@@ -29,7 +29,6 @@ export default function BulletinContent({ initialDates = [] }: BulletinContentPr
       id: initialDates.length - index, // NO 번호 (최신글이 가장 높은 번호)
       title: titleStr,
       date: formattedDate,
-      views: 0,
       rawDate: dateStr,
     }
   })
@@ -83,11 +82,10 @@ export default function BulletinContent({ initialDates = [] }: BulletinContentPr
 
         {/* 테이블 헤더 */}
         <div className="border-t-2 border-gray-800">
-          <div className="grid grid-cols-[60px_1fr_100px_60px] sm:grid-cols-[80px_1fr_120px_80px] items-center py-3 border-b border-gray-300 bg-white">
+          <div className="grid grid-cols-[60px_1fr_100px] sm:grid-cols-[80px_1fr_120px] items-center py-3 border-b border-gray-300 bg-white">
             <span className="text-center text-[14px] sm:text-[15px] font-medium text-gray-700">NO</span>
             <span className="text-center text-[14px] sm:text-[15px] font-medium text-gray-700">제목</span>
             <span className="text-center text-[14px] sm:text-[15px] font-medium text-gray-700">작성일</span>
-            <span className="text-center text-[14px] sm:text-[15px] font-medium text-gray-700">조회수</span>
           </div>
 
           {/* 테이블 본문 */}
@@ -95,14 +93,13 @@ export default function BulletinContent({ initialDates = [] }: BulletinContentPr
             <Link
               key={item.id}
               href={`/jubo/${item.rawDate}`}
-              className="grid grid-cols-[60px_1fr_100px_60px] sm:grid-cols-[80px_1fr_120px_80px] items-center py-4 border-b border-gray-200 hover:bg-gray-50 cursor-pointer transition-colors"
+              className="grid grid-cols-[60px_1fr_100px] sm:grid-cols-[80px_1fr_120px] items-center py-4 border-b border-gray-200 hover:bg-gray-50 cursor-pointer transition-colors"
             >
               <span className="text-center text-[13px] sm:text-[14px] text-gray-500">{item.id}</span>
               <span className="text-[13px] sm:text-[14px] text-gray-800 pl-4 font-medium transition-colors hover:text-amber-600">
                 {item.title}
               </span>
               <span className="text-center text-[13px] sm:text-[14px] text-gray-500">{item.date}</span>
-              <span className="text-center text-[13px] sm:text-[14px] text-[#fcaa4c]">{item.views}</span>
             </Link>
           ))}
 
