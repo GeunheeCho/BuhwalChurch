@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import { Analytics } from '@vercel/analytics/next'
+import Script from 'next/script'
+import NaverAnalytics from '@/components/naver-analytics'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -14,10 +16,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
+      <head>
+        {/* 네이버 애널리틱스 기본 스크립트 파일 로드 */}
+        <Script 
+          src="https://wcs.pstatic.net/wcslog.js" 
+          strategy="afterInteractive" 
+        />
+      </head>
       <body className="font-sans antialiased">
+        <NaverAnalytics />
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
   )
 }
+
