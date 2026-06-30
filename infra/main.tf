@@ -2,6 +2,11 @@ provider "aws" {
   region = "ap-northeast-2"
 }
 
+provider "aws" {
+  alias  = "us-east-1"  # <--- 이 별칭(alias)이 있어야 코드가 인식해!
+  region = "us-east-1"  # <--- CloudFront 인증서용 무조건 버지니아 북부!
+}
+
 # 버킷 생성 파트
 resource "aws_s3_bucket" "buhwalch_bucket" {
   bucket = "buhwalch-bucket"
@@ -59,7 +64,12 @@ resource "aws_s3_bucket_policy" "buhwalch_policy" {
 #   content_type = "image/png"
 # }
 
-
+resource "aws_acm_certificate" "cert" {
+  provider = aws.us-east-1
+  domain_name = "www.buhwalch.kr"
+  validation_method = "DNS"
+  subject_alternative_names = ["buhwalch.kr"]
+}
 
 # CDN 파트- CDN이 접근할때 필요한 인증서(OAC)
 resource "aws_cloudfront_origin_access_control" "main" {
@@ -83,7 +93,7 @@ resource "aws_cloudfront_distribution" "buhwalch_distribution" {
   enabled             = true
   default_root_object = "index.html"
   # 도메인 연결 시 사용
-  # aliases = ["mysite.${local.my_domain}", "yoursite.${local.my_domain}"]
+  aliases = ["www.buhwalch.kr","buhwalch.kr"]
 
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]
@@ -117,8 +127,9 @@ resource "aws_cloudfront_distribution" "buhwalch_distribution" {
   }
 
   viewer_certificate {
-    # AWS 기본 주소랑 인증서 사용
-    cloudfront_default_certificate = true
+    acm_certificate_arn      = aws_acm_certificate.cert.arn 
+    ssl_support_method       = "sni-only"
+    minimum_protocol_version = "TLSv1.2_2021"
   }
 }
 

@@ -1,9 +1,8 @@
 const leftServices = [
     { name: "주일 오전 예배", location: "2층 본당", time: "오전 11:00" },
-    { name: "수요예배", location: "지하 기도실", time: "오후 8:00" },
-    { name: "금요철야 기도회", location: "지하 기도실", time: "오후 8:00" },
-    { name: "새벽기도회", location: "지하 기도실", time: "오전 5:00" },
-    { name: "목요찬양집회", location: "지하 기도실", time: "오후 7:30" },
+    { name: "수요예배", location: "지하 예배실", time: "오후 8:00" },
+    { name: "금요철야 기도회", location: "지하 예배실", time: "오후 8:00" },
+    { name: "새벽기도회", location: "지하 예배실", time: "오전 4:40" },    
   ]
   
   const rightServices = [
@@ -11,7 +10,7 @@ const leftServices = [
     { name: "아동부 예배", location: "1층 소예배실", time: "오전 11:00" },
     { name: "중고등부 예배", location: "2층 본당", time: "오전 11:00" },
     { name: "청년부 모임", location: "1층 소예배실", time: "주일 예배 후" },
-    { name: "화요 중보 기도회", location: "지하 기도실", time: "오후 8:00" },
+    { name: "화요 중보 기도회", location: "지하 예배실", time: "오후 8:00" },
   ]
   
   function ServiceItem({ service }: { service: { name: string; location: string; time: string } }) {
